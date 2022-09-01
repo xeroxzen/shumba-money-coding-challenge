@@ -1,1 +1,0 @@
-# shumba-money-challenge
