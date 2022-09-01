@@ -1,0 +1,33 @@
+{
+  "name": "shumba-money-customer-api",
+  "version": "1.0.0",
+  "description": "Shumba Money Customer API coding challenge",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xeroxzen/shumba-money-challenge.git"
+  },
+  "keywords": [
+    "Shumba",
+    "Money",
+    "Customer",
+    "API"
+  ],
+  "author": "Andile Jaden Mbele",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xeroxzen/shumba-money-challenge/issues"
+  },
+  "homepage": "https://github.com/xeroxzen/shumba-money-challenge#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.4",
+    "nodemon": "^2.0.19"
+  }
+}
