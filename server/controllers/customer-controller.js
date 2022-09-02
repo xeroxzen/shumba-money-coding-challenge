@@ -15,7 +15,7 @@ export const getAllCustomers = async (req, res, next) => {
 };
 
 export const register = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { firstName, middleName, lastName, email, countryOfResidence, phoneCode, phoneNumber, password } = req.body;
   let existingCustomer;
 
   try {
@@ -30,10 +30,15 @@ export const register = async (req, res, next) => {
   }
   const hashedPassword = bcrypt.hashSync(password);
   const customer = new Customer({
-    name,
+    firstName,
+    middleName,
+    lastName,
     email,
+    countryOfResidence,
+    phoneCode,
+    phoneNumber,
     password: hashedPassword,
-    orders: [],
+    recipients: [],
   });
 
   try {

@@ -25,6 +25,8 @@ mongoose
   )
   .catch((error) => console.log(error.message));
 
+  
+
 // Redundant but let's check if we're running
 const connection = mongoose.connection;
 connection.once("open", () => {
