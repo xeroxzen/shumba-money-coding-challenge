@@ -15,8 +15,9 @@ app.use(cors());
 app.use("/api/v1/customers", customerRouter);
 app.use("/api/v1/recipients", recipientRouter);
 
-const CONNECTION_URL = process.env.DB;
+const CONNECTION_URL = process.env.URI;
 const PORT = process.env.PORT || 5001;
+const DB = process.env.DB
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -24,8 +25,6 @@ mongoose
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   )
   .catch((error) => console.log(error.message));
-
-  
 
 // Redundant but let's check if we're running
 const connection = mongoose.connection;

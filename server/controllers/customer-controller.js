@@ -15,7 +15,16 @@ export const getAllCustomers = async (req, res, next) => {
 };
 
 export const register = async (req, res, next) => {
-  const { firstName, middleName, lastName, email, countryOfResidence, phoneCode, phoneNumber, password } = req.body;
+  const {
+    firstName,
+    middleName,
+    lastName,
+    email,
+    countryOfResidence,
+    phoneCode,
+    phoneNumber,
+    password,
+  } = req.body;
   let existingCustomer;
 
   try {
@@ -70,4 +79,23 @@ export const login = async (req, res, next) => {
     return res.status(400).json({ message: "Invalid password" });
   }
   return res.status(200).json({ message: "Login successful" });
+};
+
+export const deleteCustomer = async (req, res, next) => {
+  const { id } = req.params;
+  let customer;
+  try {
+    customer = await Customer.findById(id);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!customer) {
+    return res.status(404).json({ message: "Customer not found" });
+  }
+  try {
+    await customer.remove();
+  } catch (err) {
+    return console.log(err);
+  }
+  return res.status(200).json({ message: "Customer deleted" });
 };
