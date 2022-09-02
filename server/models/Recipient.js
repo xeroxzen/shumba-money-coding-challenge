@@ -10,9 +10,13 @@ const recipientSchema = new Schema({
   phoneNumber: { type: String, required: true },
   countryOfResidence: { type: String, required: true },
   cityOrTown: { type: String, required: true },
-  benefactor: [
+  customer: [
     { type: mongoose.Types.ObjectId, ref: "Customer", required: true },
   ],
+  transaction: [
+    { type: mongoose.Types.ObjectId, ref: "Transaction", required: false },
+  ],
+  createdAt: { type: Date, default: Date.now },
 });
 
 export default mongoose.model("Recipient", recipientSchema);

@@ -24,6 +24,7 @@ export const createRecipient = async (req, res, next) => {
     phoneNumber,
     countryOfResidence,
     cityOrTown,
+    customer,
   } = req.body;
 
   let existingCustomer;
@@ -87,6 +88,9 @@ export const updateRecipient = async (req, res, next) => {
   if (!updatedRecipient) {
     return res.status(404).json({ message: "Recipient not found" });
   }
+  if (!updatedRecipient) {
+    return res.status(500).json({ message: "Recipient not updated" });
+  }
   return res.status(200).json({ updatedRecipient });
 };
 
@@ -103,10 +107,10 @@ export const deleteRecipient = async (req, res, next) => {
   return res.status(200).json({ deletedRecipient });
 };
 
-export const getById = async (req, res, next) => {
+export const getRecipientById = async (req, res, next) => {
   let recipient;
   try {
-    recipient = await Recipient.findById(req.params.id).populate("customer");
+    recipient = await Recipient.findById(req.params.id);
   } catch (err) {
     return console.error(err);
   }
