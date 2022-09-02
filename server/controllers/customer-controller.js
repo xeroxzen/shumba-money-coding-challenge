@@ -47,7 +47,8 @@ export const register = async (req, res, next) => {
     phoneCode,
     phoneNumber,
     password: hashedPassword,
-    recipients: [],
+    beneficiaries: [],
+    transactions: [],
   });
 
   try {

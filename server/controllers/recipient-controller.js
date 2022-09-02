@@ -24,7 +24,7 @@ export const createRecipient = async (req, res, next) => {
     phoneNumber,
     countryOfResidence,
     cityOrTown,
-    customer,
+    benefactor, //customer
   } = req.body;
 
   let existingCustomer;
@@ -44,7 +44,7 @@ export const createRecipient = async (req, res, next) => {
     phoneNumber,
     countryOfResidence,
     cityOrTown,
-    customer,
+    benefactor, //customer
   });
   try {
     const session = await mongoose.startSession();

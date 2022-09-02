@@ -11,7 +11,7 @@ const customerSchema = new Schema({
   phoneNumber: { type: String, required: true, unique: true },
   phoneCode: { type: String, required: true },
   password: { type: String, required: true, minlength: 8 },
-  recipients: [
+  beneficiary: [
     { type: mongoose.Types.ObjectId, ref: "Recipients", required: true },
   ],
   transactions: {
