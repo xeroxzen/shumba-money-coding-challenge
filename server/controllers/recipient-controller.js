@@ -3,16 +3,16 @@ import Customer from "../models/Customer";
 import mongoose from "mongoose";
 
 export const getAllRecipients = async (req, res, next) => {
-  let recipients;
+  let beneficiaries;
   try {
-    recipients = await Recipient.find().populate("customer");
+    beneficiaries = await Recipient.find().populate("benefactor");
   } catch (err) {
     return console.error(err);
   }
-  if (!recipients) {
-    return res.status(404).json({ message: "Recipients not found" });
+  if (!beneficiaries) {
+    return res.status(404).json({ message: "Beneficiaries not found" });
   }
-  return res.status(200).json({ recipients });
+  return res.status(200).json({ beneficiaries });
 };
 
 export const createRecipient = async (req, res, next) => {
@@ -29,7 +29,7 @@ export const createRecipient = async (req, res, next) => {
 
   let existingCustomer;
   try {
-    existingCustomer = await Customer.findById(customer);
+    existingCustomer = await Customer.findById(benefactor);
   } catch (err) {
     return console.log(err);
   }
@@ -44,7 +44,7 @@ export const createRecipient = async (req, res, next) => {
     phoneNumber,
     countryOfResidence,
     cityOrTown,
-    benefactor, //customer
+    benefactor: customer, //customer
   });
   try {
     const session = await mongoose.startSession();

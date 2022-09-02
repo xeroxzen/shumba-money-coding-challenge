@@ -12,13 +12,9 @@ const customerSchema = new Schema({
   phoneCode: { type: String, required: true },
   password: { type: String, required: true, minlength: 8 },
   beneficiary: [
-    { type: mongoose.Types.ObjectId, ref: "Recipients", required: true },
+    { type: mongoose.Types.ObjectId, ref: "Recipients", required: false },
   ],
-  transaction: {
-    type: mongoose.Types.ObjectId,
-    ref: "Transactions",
-    required: true,
-  },
+  
   createdAt: { type: Date, default: Date.now },
 });
 
