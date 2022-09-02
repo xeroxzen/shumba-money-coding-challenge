@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Types.Schema;
+const Schema = mongoose.Schema;
 
 const customerSchema = new Schema({
   firstName: { type: String, required: true },
