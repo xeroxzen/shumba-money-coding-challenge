@@ -17,15 +17,15 @@ export const getAllTransactions = async (req, res, next) => {
 };
 
 export const createTransaction = async (req, res, next) => {
-  const { amount, currency, recipient, customer } = req.body;
+  const { amount, currency, receiver, sender } = req.body;
 
-  let existingRecipient;
+  let existingReceiver;
   try {
-    existingRecipient = await Recipient.findById(recipient);
+    existingReceiver = await Recipient.findById(receiver);
   } catch (err) {
     return console.log(err);
   }
-  if (!existingRecipient) {
+  if (!existingReceiver) {
     return res.status(400).json({ message: "Recipient does not exist" });
   }
 
@@ -42,16 +42,16 @@ export const createTransaction = async (req, res, next) => {
   const transaction = new Transaction({
     amount,
     currency,
-    beneficiary: [],
-    benefactor,
+    receiver: [],
+    sender,
   });
   try {
     const session = await mongoose.startSession();
     session.startTransaction();
     await transaction.save();
-    existingRecipient.transactions.push(transaction);
-    await existingRecipient.save({ session });
-    await existingCustomer.save({ session });
+    existingReceiver.transactions.push(transaction);
+    await existingReceiver.save({ session });
+    // await existingCustomer.save({ session });
     await session.commitTransaction();
   } catch (err) {
     console.log(err);

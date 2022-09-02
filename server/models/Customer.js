@@ -14,7 +14,7 @@ const customerSchema = new Schema({
   beneficiary: [
     { type: mongoose.Types.ObjectId, ref: "Recipients", required: true },
   ],
-  transactions: {
+  transaction: {
     type: mongoose.Types.ObjectId,
     ref: "Transactions",
     required: true,
