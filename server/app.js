@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import customerRouter from "./routes/customer-routes";
 import recipientRouter from "./routes/recipient-routes";
+import transactionRouter from "./routes/transaction-routes";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(cors());
 // Here we'll have routers
 app.use("/api/v1/customers", customerRouter);
 app.use("/api/v1/recipients", recipientRouter);
+app.use("/api/v1/transactions", transactionRouter);
 
 const CONNECTION_URL = process.env.URI;
 const PORT = process.env.PORT || 5001;

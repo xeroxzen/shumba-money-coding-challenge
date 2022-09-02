@@ -5,10 +5,10 @@ import {
   login,
 } from "../controllers/customer-controller";
 
-const router = express.Router();
+const customerRouter = express.Router();
 
-router.get("/", getAllCustomers);
-router.post("/register", register);
-router.post("/login", login);
+customerRouter.get("/", getAllCustomers);
+customerRouter.post("/register", register);
+customerRouter.post("/login", login);
 
-export default router;
+export default customerRouter;
