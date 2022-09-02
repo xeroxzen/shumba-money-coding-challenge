@@ -14,6 +14,11 @@ const customerSchema = new Schema({
   recipients: [
     { type: mongoose.Types.ObjectId, ref: "Recipients", required: true },
   ],
+  transactions: {
+    type: mongoose.Types.ObjectId,
+    ref: "Transactions",
+    required: true,
+  },
   createdAt: { type: Date, default: Date.now },
 });
 
