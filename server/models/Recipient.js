@@ -10,19 +10,19 @@ const recipientSchema = new Schema({
   phoneNumber: { type: String, required: true },
   countryOfResidence: { type: String, required: true },
   cityOrTown: { type: String, required: true },
-  customer: {
+  sender: {
     type: mongoose.Types.ObjectId,
     ref: "Customer",
     required: true,
   },
 
-  transaction: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Transactions",
-      required: false,
-    },
-  ],
+  //   transaction: [
+  //     {
+  //       type: mongoose.Types.ObjectId,
+  //       ref: "Transactions",
+  //       required: false,
+  //     },
+  //   ],
   createdAt: { type: Date, default: Date.now },
 });
 

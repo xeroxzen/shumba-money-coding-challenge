@@ -80,3 +80,17 @@ export const login = async (req, res, next) => {
   }
   return res.status(200).json({ message: "Login successful" });
 };
+
+export const getByCustomerId = async (req, res, next) => {
+  const customerId = req.params.id;
+  let customer;
+  try {
+    customer = await Customer.findById(customerId);
+  } catch (err) {
+    return console.log(err);
+  }
+  if (!customer) {
+    return res.status(404).json({ message: "Customer not found" });
+  }
+  return res.status(200).json({ customer });
+};

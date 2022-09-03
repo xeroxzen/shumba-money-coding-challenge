@@ -44,6 +44,8 @@ Shumba Money is a money transfer service that allows one to send money from coun
                     "amount": "number",
                     "currency": "string",
                     "status": "string",
+                    "sender": "string",
+                    "recipient": "string",
                     "createdAt": "date",
                     "updatedAt": "date"
                 }

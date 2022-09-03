@@ -17,11 +17,11 @@ export const getAllTransactions = async (req, res, next) => {
 };
 
 export const createTransaction = async (req, res, next) => {
-  const { amount, currency, receiver, sender } = req.body;
+  const { amount, currency, status, recipient, sender } = req.body;
 
   let existingReceiver;
   try {
-    existingReceiver = await Recipient.findById(receiver);
+    existingReceiver = await Recipient.findById(recipient);
   } catch (err) {
     return console.log(err);
   }
@@ -29,20 +29,21 @@ export const createTransaction = async (req, res, next) => {
     return res.status(400).json({ message: "Recipient does not exist" });
   }
 
-  let existingCustomer;
+  let existingSender;
   try {
-    existingCustomer = await Customer.findById(customer);
+    existingSender = await Customer.findById(sender);
   } catch (err) {
     return console.log(err);
   }
-  if (!existingCustomer) {
+  if (!existingSender) {
     return res.status(400).json({ message: "Customer does not exist" });
   }
 
   const transaction = new Transaction({
     amount,
     currency,
-    receiver: [],
+    status,
+    recipient,
     sender,
   });
   try {
@@ -56,6 +57,22 @@ export const createTransaction = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: err.message });
+  }
+  return res.status(200).json({ transaction });
+};
+
+export const getTransactionById = async (req, res, next) => {
+  const transactionId = req.params.id;
+  let transaction;
+  try {
+    transaction = await Transaction.findById(transactionId).populate(
+      "recipient"
+    );
+  } catch (err) {
+    return console.error(err);
+  }
+  if (!transaction) {
+    return res.status(404).json({ message: "Transaction not found" });
   }
   return res.status(200).json({ transaction });
 };

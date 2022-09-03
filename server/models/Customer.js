@@ -11,10 +11,13 @@ const customerSchema = new Schema({
   phoneNumber: { type: String, required: true, unique: true },
   phoneCode: { type: String, required: true },
   password: { type: String, required: true, minlength: 8 },
-  recipients: [
-    { type: mongoose.Types.ObjectId, ref: "Recipients", required: true },
+  recipient: [
+    { type: mongoose.Types.ObjectId, ref: "Recipient", required: true },
   ],
-  
+  // transaction: [
+  //   { type: mongoose.Types.ObjectId, ref: "Transaction", required: true },
+  // ],
+
   createdAt: { type: Date, default: Date.now },
 });
 

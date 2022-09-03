@@ -5,12 +5,13 @@ const Schema = mongoose.Schema;
 const transactionSchema = new Schema({
   amount: { type: Number, required: true },
   currency: { type: String, required: true },
+  status: { type: String, required: true },
   sender: {
     type: mongoose.Types.ObjectId,
     ref: "Customer",
     required: true,
   },
-  receiver: {
+  recipient: {
     type: mongoose.Types.ObjectId,
     ref: "Recipient",
     required: true,
