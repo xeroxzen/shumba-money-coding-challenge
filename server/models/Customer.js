@@ -9,7 +9,6 @@ const customerSchema = new Schema({
   email: { type: String, required: true, unique: true },
   countryOfResidence: { type: String, required: true },
   phoneNumber: { type: String, required: true, unique: true },
-  phoneCode: { type: String, required: true },
   password: { type: String, required: true, minlength: 8 },
   recipient: [
     { type: mongoose.Types.ObjectId, ref: "Recipient", required: true },

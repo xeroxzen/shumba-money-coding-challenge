@@ -21,7 +21,6 @@ export const register = async (req, res, next) => {
     lastName,
     email,
     countryOfResidence,
-    phoneCode,
     phoneNumber,
     password,
   } = req.body;
@@ -44,7 +43,6 @@ export const register = async (req, res, next) => {
     lastName,
     email,
     countryOfResidence,
-    phoneCode,
     phoneNumber,
     password: hashedPassword,
     recipients: [],
