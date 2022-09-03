@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export const getAllRecipients = async (req, res, next) => {
   let recipients;
   try {
-    recipients = await Recipient.find(); //populate sender
+    recipients = await Recipient.find().populate("sender"); 
   } catch (err) {
     return console.error(err);
   }
@@ -24,7 +24,7 @@ export const createRecipient = async (req, res, next) => {
     phoneNumber,
     countryOfResidence,
     cityOrTown,
-    sender, //customer
+    sender,
   } = req.body;
 
   let existingCustomer;
@@ -44,7 +44,7 @@ export const createRecipient = async (req, res, next) => {
     phoneNumber,
     countryOfResidence,
     cityOrTown,
-    sender, //customer
+    sender, 
   });
   try {
     const session = await mongoose.startSession();
