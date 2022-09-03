@@ -48,18 +48,20 @@ export default function Auth() {
     console.log(inputs);
     if (isRegister) {
       sendRequest("register")
-        .then((data) => localStorage.setItem("userId", data.user._id))
+        .then((data) => localStorage.setItem("userId", data.customers._id))
         .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/recipients"))
+        .then(() => navigate("/"))
         .then((data) => console.log(data));
     } else {
       sendRequest()
-        .then((data) => localStorage.setItem("userId", data.user._id))
+        .then((data) => localStorage.setItem("userId", data.customers._id))
         .then(() => dispatch(authActions.login()))
         .then(() => navigate("/recipients"))
         .then((data) => console.log(data));
     }
   };
+
+  // use lazy loaders
 
   return (
     <>
@@ -92,6 +94,8 @@ export default function Auth() {
                     id="first-name"
                     name="firstName"
                     type="text"
+                    onChange={handleChange}
+                    value={inputs.firstName}
                     autoComplete="off"
                     required
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -107,6 +111,8 @@ export default function Auth() {
                   <input
                     id="middle-name"
                     name="middleName"
+                    onChange={handleChange}
+                    value={inputs.middleName}
                     type="text"
                     autoComplete="off"
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -123,6 +129,8 @@ export default function Auth() {
                     id="last-name"
                     name="lastName"
                     type="text"
+                    onChange={handleChange}
+                    value={inputs.lastName}
                     autoComplete="off"
                     required
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -139,6 +147,8 @@ export default function Auth() {
                     id="country-of-residence"
                     name="country"
                     type="text"
+                    onChange={handleChange}
+                    value={inputs.countryOfResidence}
                     autoComplete="off"
                     required
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -154,6 +164,8 @@ export default function Auth() {
                   <input
                     id="phone-number"
                     name="phoneNumber"
+                    onChange={handleChange}
+                    value={inputs.phoneNumber}
                     type="tel"
                     autoComplete="off"
                     required
@@ -173,6 +185,8 @@ export default function Auth() {
                   name="email"
                   type="email"
                   autoComplete="off"
+                  onChange={handleChange}
+                  value={inputs.email}
                   required
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Email address"
@@ -185,6 +199,8 @@ export default function Auth() {
                 <input
                   id="password"
                   name="password"
+                  onChange={handleChange}
+                  value={inputs.password}
                   type="password"
                   autoComplete="off"
                   required
@@ -200,6 +216,7 @@ export default function Auth() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
+                  onChange={handleChange}
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 />
                 <label
@@ -239,7 +256,7 @@ export default function Auth() {
               onClick={() => setIsRegister(!isRegister)}
               color="warning"
               type="submit"
-              className="group relative flex w-full justify-center rounded-sm border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                 <LockClosedIcon

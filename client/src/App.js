@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
 import Auth from "./components/Auth";
 import CreateRecipient from "./components/CreateRecipient";
 import Recipients from "./components/Recipients";
@@ -21,18 +22,27 @@ function App() {
 
   return (
     <React.Fragment>
-      <header>
-        <Header />
-      </header>
+      {/* Show this only when logged in */}
+      {isAuthenticated && (
+        <>
+          <header>
+            <Header />
+          </header>
+        </>
+      )}
       <main>
         <Routes>
-          {/* <Route path="/auth" element={<Auth />} /> */}
-          <Route path="/" element={<Auth />} />
-          <Route path="/recipients" element={<Recipients />} />
-          <Route path="/recipient/:id" element={<Recipient />} />
-          <Route path="/recipient/create" element={<CreateRecipient />} />
+          {!isAuthenticated ? (
+            <Route path="/auth" element={<Auth />} />
+          ) : (
+            <>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/recipients" element={<Recipients />} />
+              <Route path="/recipient/:id" element={<Recipient />} />
+              <Route path="/recipient/create" element={<CreateRecipient />} />
+            </>
+          )}
         </Routes>
-        <Auth />
       </main>
     </React.Fragment>
   );
