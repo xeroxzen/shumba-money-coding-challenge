@@ -10,14 +10,7 @@ export default function Auth() {
   const dispatch = useDispatch();
 
   const [isRegister, setIsRegister] = useState(false);
-  const [inputs, setInputs] = React.useState({
-    // firstName: "",
-    // lastName: "",
-    // email: "",
-    // countryOfResidence: "",
-    // phoneNumber: "",
-    // password: "",
-  });
+  const [inputs, setInputs] = useState({});
 
   const sendRequest = async (type = "login") => {
     const res = await axios

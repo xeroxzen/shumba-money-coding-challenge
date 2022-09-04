@@ -29,17 +29,17 @@ function App() {
 
       <main>
         <Routes>
-          {/* {!isAuthenticated ? ( */}
-          <Route path="/auth" element={<Auth />} />
-          {/* // ) : ( */}
-          <>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/recipients" element={<Recipients />} />
-            <Route path="/recipient/" element={<Recipient />} />
-            <Route path="/recipient/add" element={<CreateRecipient />} />
-          </>
-          {/* // )} */}
+          {!isAuthenticated ? (
+            <Route path="/auth" element={<Auth />} />
+          ) : (
+            <>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/recipients" element={<Recipients />} />
+              <Route path="/recipient/" element={<Recipient />} />
+              <Route path="/recipient/add" element={<CreateRecipient />} />
+            </>
+          )}
         </Routes>
       </main>
     </React.Fragment>

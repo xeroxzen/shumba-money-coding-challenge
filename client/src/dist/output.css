@@ -780,6 +780,10 @@ video {
   flex-shrink: 0;
 }
 
+.shrink {
+  flex-shrink: 1;
+}
+
 .table-auto {
   table-layout: auto;
 }

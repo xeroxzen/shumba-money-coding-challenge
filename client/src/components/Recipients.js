@@ -8,8 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
-import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
-import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import { Button } from "primereact/button";
+import "./ButtonDemo.css";
 import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -106,10 +106,17 @@ export default function Recipients({ id }) {
                       {recipient.cityOrTown}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <CreateRoundedIcon color="primary" />
+                      <Button
+                        label="Edit"
+                        className="p-button-info p-button-raised"
+                      />
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      <DeleteForeverRoundedIcon onClick={handleDelete}  color="warning" />
+                      <Button
+                        onClick={handleDelete}
+                        label="Delete"
+                        className="p-button-raised p-button-danger"
+                      />
                     </StyledTableCell>
                   </StyledTableRow>
                 ))
