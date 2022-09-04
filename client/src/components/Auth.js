@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import "../dist/output.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [isRegister, setIsRegister] = useState(false);
   const [inputs, setInputs] = React.useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    countryOfResidence: "",
-    phoneNumber: "",
-    password: "",
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    // countryOfResidence: "",
+    // phoneNumber: "",
+    // password: "",
   });
 
   const sendRequest = async (type = "login") => {
@@ -35,12 +36,15 @@ export default function Auth() {
     return data;
   };
 
-  const [isRegister, setIsRegister] = React.useState(false);
   const handleChange = (e) => {
-    setInputs((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    try {
+      setInputs((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -48,20 +52,17 @@ export default function Auth() {
     console.log(inputs);
     if (isRegister) {
       sendRequest("register")
-        .then((data) => localStorage.setItem("userId", data.customers._id))
+        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/"))
+
         .then((data) => console.log(data));
     } else {
       sendRequest()
-        .then((data) => localStorage.setItem("userId", data.customers._id))
+        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
-        .then(() => navigate("/recipients"))
         .then((data) => console.log(data));
     }
   };
-
-  // use lazy loaders
 
   return (
     <>
@@ -146,9 +147,9 @@ export default function Auth() {
                   <input
                     id="country-of-residence"
                     name="country"
-                    type="text"
                     onChange={handleChange}
                     value={inputs.countryOfResidence}
+                    type="text"
                     autoComplete="off"
                     required
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -216,7 +217,6 @@ export default function Auth() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  onChange={handleChange}
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 />
                 <label
