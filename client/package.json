@@ -9,6 +9,8 @@
     "@emotion/styled": "^11.10.4",
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^2.0.10",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.3",
     "@mui/styles": "^5.10.3",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",

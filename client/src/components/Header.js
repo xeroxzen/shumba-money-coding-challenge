@@ -21,7 +21,7 @@ const solutions = [
   {
     name: "Add Recipient",
     description: "Add a new recipient to your list.",
-    href: "/recipient/create",
+    href: "/recipient/add",
     icon: CursorArrowRaysIcon,
   },
 ];

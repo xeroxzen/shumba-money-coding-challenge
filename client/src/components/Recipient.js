@@ -57,7 +57,7 @@ export default function Recipient() {
             <dt className="text-sm font-medium text-gray-500">Attachments</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               <ul
-                role="list"
+                
                 className="divide-y divide-gray-200 rounded-md border border-gray-200"
               >
                 <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
@@ -72,7 +72,7 @@ export default function Recipient() {
                   </div>
                   <div className="ml-4 flex-shrink-0">
                     <a
-                      href="#"
+                      href="/recipients"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       Download
@@ -91,7 +91,7 @@ export default function Recipient() {
                   </div>
                   <div className="ml-4 flex-shrink-0">
                     <a
-                      href="#"
+                      href="/download"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       Download

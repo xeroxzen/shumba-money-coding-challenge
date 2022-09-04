@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import "../dist/output.css";
 import axios from "axios";
