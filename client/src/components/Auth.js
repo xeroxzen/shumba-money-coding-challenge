@@ -78,12 +78,12 @@ export default function Auth() {
           >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
-              {/* {isRegister ? "Sign Up" : "Login"} */}
+              {isRegister ? "Register" : "Login"}
               <div>
                 <label htmlFor="first-name" className="sr-only">
                   First name
                 </label>
-                {isRegister ? (
+                {isRegister && (
                   <input
                     id="first-name"
                     name="firstName"
@@ -95,13 +95,13 @@ export default function Auth() {
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="Andile"
                   />
-                ) : null}
+                )}
               </div>
               <div>
                 <label htmlFor="middle-name" className="sr-only">
                   Middle name
                 </label>
-                {isRegister ? (
+                {isRegister && (
                   <input
                     id="middle-name"
                     name="middleName"
@@ -112,13 +112,13 @@ export default function Auth() {
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="Jaden"
                   />
-                ) : null}
+                )}
               </div>
               <div>
                 <label htmlFor="last-name" className="sr-only">
                   Last name
                 </label>
-                {isRegister ? (
+                {isRegister && (
                   <input
                     id="last-name"
                     name="lastName"
@@ -130,13 +130,13 @@ export default function Auth() {
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="Mbele"
                   />
-                ) : null}
+                )}
               </div>
               <div>
                 <label htmlFor="country" className="sr-only">
                   Country of Residence
                 </label>
-                {isRegister ? (
+                {isRegister && (
                   <input
                     id="country-of-residence"
                     name="country"
@@ -148,13 +148,13 @@ export default function Auth() {
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="New Zealand"
                   />
-                ) : null}
+                )}
               </div>
               <div>
                 <label htmlFor="phone-number" className="sr-only">
                   Phone number
                 </label>
-                {isRegister ? (
+                {isRegister && (
                   <input
                     id="phone-number"
                     name="phoneNumber"
@@ -166,7 +166,7 @@ export default function Auth() {
                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     placeholder="+61 621 123 4567"
                   />
-                ) : null}
+                )}
               </div>
 
               <div>
@@ -225,7 +225,7 @@ export default function Auth() {
                   href="/auth"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Forgot your password?
+                  Forgot your password
                 </a>
               </div>
             </div>
