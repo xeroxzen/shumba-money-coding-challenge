@@ -1,5 +1,6 @@
 import Customer from "../models/Customer";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 export const getAllCustomers = async (req, res, next) => {
   let customers;
@@ -73,10 +74,23 @@ export const login = async (req, res, next) => {
     password,
     existingCustomer.password
   );
+
   if (!isValidPassword) {
     return res.status(400).json({ message: "Invalid password" });
   }
-  return res.status(200).json({ message: "Login successful" });
+
+  if (existingCustomer && isValidPassword) {
+    const token = jwt.sign(
+      {
+        name: existingCustomer.firstName,
+        password: existingCustomer.password,
+      },
+      process.env.JWT_SECRET
+    );
+    return res
+      .status(200)
+      .json({ message: "Login Successful", existingCustomer: token });
+  }
 };
 
 export const getByCustomerId = async (req, res, next) => {
