@@ -23,8 +23,23 @@ export default function Auth() {
         phoneNumber: inputs.phoneNumber,
         password: inputs.password,
       })
-      .catch((err) => console.log(err));
-    setResponse(res.data);
+      .then((res) => {
+        const { token } = res.data;
+        localStorage.setItem("userId", token);
+        localStorage.getItem("userId");
+        dispatch({
+          type: "LOGIN",
+          payload: res.data,
+        });
+        // success();
+      })
+
+      .catch((err) => {
+        if (err) {
+          console.log(err.response.data);
+          setResponse(err.response.data);
+        }
+      });
     const data = await res.data;
     console.log(data);
     return data;
@@ -55,12 +70,13 @@ export default function Auth() {
     }
   };
 
-  // if status is 200 or 201 then navigate to dashboard
-  // useEffect(() => {
-  //   if (response && response.status === 200) {
-  //     navigate("dashboard");
-  //   }
-  // }, [response, navigate]);
+  // Once logged in, generate a token valid across the app and store it in local storage and redux store for use in other components and pages of the app
+  useEffect(() => {
+    if (response && response.status === 200) {
+      localStorage.setItem("userId", response.data.token);
+      dispatch(authActions.login());
+    }
+  }, [response, dispatch]);
 
   return (
     <>
