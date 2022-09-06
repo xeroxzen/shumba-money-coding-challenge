@@ -10,8 +10,8 @@ const customerSchema = new Schema({
   countryOfResidence: { type: String, required: true },
   phoneNumber: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 8 },
-  recipient: [
-    { type: mongoose.Types.ObjectId, ref: "Recipient", required: true },
+  recipients: [
+    { type: mongoose.Types.ObjectId, ref: "Recipients", required: true },
   ],
   // transaction: [
   //   { type: mongoose.Types.ObjectId, ref: "Transaction", required: true },

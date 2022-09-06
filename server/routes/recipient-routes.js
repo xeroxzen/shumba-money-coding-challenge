@@ -3,7 +3,7 @@ import {
   createRecipient,
   updateRecipient,
   deleteRecipient,
-  getByCustomerId,
+  getBySenderId,
   getAllRecipients,
   getRecipientById,
 } from "../controllers/recipient-controller";
@@ -11,10 +11,10 @@ import {
 const recipientRouter = express.Router();
 
 recipientRouter.get("/", getAllRecipients);
-recipientRouter.post("/create", createRecipient);
+recipientRouter.post("/add", createRecipient);
 recipientRouter.put("/update/:id", updateRecipient);
 recipientRouter.delete("/:id", deleteRecipient);
-recipientRouter.get("/customer/:id", getByCustomerId);
+recipientRouter.get("/sender/:id", getBySenderId);
 recipientRouter.get("/:id", getRecipientById);
 
 export default recipientRouter;

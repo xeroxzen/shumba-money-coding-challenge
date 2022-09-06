@@ -87,9 +87,7 @@ export const login = async (req, res, next) => {
       },
       process.env.JWT_SECRET
     );
-    return res
-      .status(200)
-      .json({ message: "Login Successful", existingCustomer: token });
+    return res.status(200).json({ message: "Login Successful", Token: token });
   }
 };
 

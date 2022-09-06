@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export const getAllRecipients = async (req, res, next) => {
   let recipients;
   try {
-    recipients = await Recipient.find().populate("sender"); 
+    recipients = await Recipient.find().populate("sender");
   } catch (err) {
     return console.error(err);
   }
@@ -44,13 +44,13 @@ export const createRecipient = async (req, res, next) => {
     phoneNumber,
     countryOfResidence,
     cityOrTown,
-    sender, 
+    sender,
   });
   try {
     const session = await mongoose.startSession();
     session.startTransaction();
     await recipient.save();
-    existingCustomer.recipient.push(recipient);
+    existingCustomer.recipients.push(recipient);
     await existingCustomer.save({ session });
     await session.commitTransaction();
   } catch (err) {
@@ -97,14 +97,20 @@ export const updateRecipient = async (req, res, next) => {
 export const deleteRecipient = async (req, res, next) => {
   let deletedRecipient;
   try {
-    deletedRecipient = await Recipient.findByIdAndDelete(req.params.id);
+    deletedRecipient = await Recipient.findByIdAndDelete(
+      req.params.id
+    ).populate("sender");
+    await deletedRecipient.sender.recipients.pull(deletedRecipient);
+    await deletedRecipient.sender.save();
   } catch (err) {
     return console.error(err);
   }
   if (!deletedRecipient) {
     return res.status(404).json({ message: "Recipient not found" });
   }
-  return res.status(200).json({ deletedRecipient });
+  return res
+    .status(200)
+    .json({ message: "Recipient deleted", deletedRecipient });
 };
 
 export const getRecipientById = async (req, res, next) => {
@@ -120,15 +126,15 @@ export const getRecipientById = async (req, res, next) => {
   return res.status(200).json({ recipient });
 };
 
-export const getByCustomerId = async (req, res, next) => {
-  let recipients;
+export const getBySenderId = async (req, res, next) => {
+  let sender;
   try {
-    recipients = await Recipient.find({ customer: req.params.id });
+    sender = await Recipient.findById({ senderId: req.params.id });
   } catch (err) {
     return console.error(err);
   }
-  if (!recipients) {
-    return res.status(404).json({ message: "Recipients not found" });
+  if (!sender) {
+    return res.status(404).json({ message: "Sender not found" });
   }
-  return res.status(200).json({ recipients });
+  return res.status(200).json({ sender });
 };
