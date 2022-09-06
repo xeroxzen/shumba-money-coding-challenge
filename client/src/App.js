@@ -6,6 +6,7 @@ import DashboardContainer from "./containers/DashboardContainer";
 import AuthContainer from "./containers/AuthContainer";
 
 import { authActions } from "./store";
+import RecipientForm from "./components/recipients/RecipientForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
           <Route path="/recipients" element={<RecipientContainer />} />
           <Route path="/" element={<DashboardContainer />} />
           <Route path="/dashboard" element={<DashboardContainer />} />
+          <Route path="/recipient/add" element={<RecipientForm />} />
         </Routes>
       </main>
     </React.Fragment>

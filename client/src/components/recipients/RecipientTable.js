@@ -13,7 +13,7 @@ export default function RecipientTable() {
               <div className="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                 {/* make text color navy blue */}
 
-                <h3 className="text-2xl font-bold text-cyan-700 text-center capitalize">
+                <h3 className="text-2xl font-bold text-cyan-700 text-center text-uppercase">
                   Recipients
                 </h3>
               </div>
