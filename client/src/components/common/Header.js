@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../store";
+import { authActions } from "../../store";
 import {
   Bars3Icon,
   ChartBarIcon,
@@ -55,6 +55,16 @@ export default function Header() {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
+            <Popover className="relative">
+              <>
+                  <span>Dashboard</span>
+                  <a
+                    href="/"
+                    className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
+                  ></a>
+                
+              </>
+            </Popover>
             <Popover className="relative">
               {({ open }) => (
                 <>

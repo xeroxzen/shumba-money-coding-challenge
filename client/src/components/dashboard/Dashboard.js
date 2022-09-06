@@ -5,7 +5,7 @@ import {
   GlobeAltIcon,
   ScaleIcon,
 } from "@heroicons/react/24/outline";
-import "../dist/output.css";
+import "../../dist/output.css";
 
 const features = [
   {

@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "./components/Header";
-import Dashboard from "./components/Dashboard";
-import Auth from "./components/Auth";
-import CreateRecipient from "./components/CreateRecipient";
-import Recipients from "./components/Recipients";
-import Recipient from "./components/Recipient";
+import RecipientContainer from "./containers/RecipientContainer";
+import DashboardContainer from "./containers/DashboardContainer";
+import AuthContainer from "./containers/AuthContainer";
+
 import { authActions } from "./store";
 
 function App() {
@@ -22,20 +20,12 @@ function App() {
 
   return (
     <React.Fragment>
-      <header>
-        {" "}
-        <Header />
-      </header>
-
-      <main>
+      <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <Routes>
-          <Route path="/auth" element={<Auth />} />
-
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/recipients" element={<Recipients />} />
-          <Route path="/recipient/" element={<Recipient />} />
-          <Route path="/recipient/add" element={<CreateRecipient />} />
+          <Route path="/auth" element={<AuthContainer />} />
+          <Route path="/recipients" element={<RecipientContainer />} />
+          <Route path="/" element={<DashboardContainer />} />
+          <Route path="/dashboard" element={<DashboardContainer />} />
         </Routes>
       </main>
     </React.Fragment>

@@ -1,6 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+/* import bootstrap */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+/* import mui/material */
 
 * {
   margin: 0;
+  padding: 0;
+
   /* Set background image to a picture stored in assets */
+}
+
+a {
+  text-decoration: none;
 }

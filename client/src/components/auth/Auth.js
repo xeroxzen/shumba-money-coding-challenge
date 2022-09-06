@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
-import "../dist/output.css";
+import "../../dist/output.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store";
+import { authActions } from "../../store";
 // import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
@@ -72,9 +72,8 @@ export default function Auth() {
             </h2>
           </div>
           <form
-            className="mt-8 space-y-6"
             onSubmit={handleSubmit}
-            method="POST"
+            className="mt-8 space-y-6"
           >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
