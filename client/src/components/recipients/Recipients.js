@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function Recipients() {
+export default function Recipients({ _id }) {
   const [recipients, setRecipients] = useState({});
-  const id = useParams()._id;
+  const [recipient, setRecipient] = useState({});
+  const id = useParams().id;
+  const [user, setUser] = useState();
   const URI = "http://localhost:5001/api/v1/recipients/";
+  const navigate = useNavigate();
 
   const fetchRecipients = async () => {
     const res = await axios.get(`${URI}`).catch((err) => {
@@ -16,21 +19,51 @@ export default function Recipients() {
     return data;
   };
 
-  const deleteRecipient = async (e) => {
-    try {
-      const res = await axios.delete(`${URI}${id}`);
-      console.log(res);
-
-      const data = await res.data;
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
+  const fetchRecipientsBySender = async () => {
+    const res = await axios.get(`${URI}sender/${id}`).catch((err) => {
+      console.log(err);
+    });
+    const data = await res.data;
+    console.log(data);
+    return data;
   };
 
-  const handleDelete = () => {
-    deleteRecipient();
+  fetchRecipientsBySender().then((data) => {
+    setUser(data.user);
+    console.log(data.user);
+  });
+
+  const deleteRequest = async (id) => {
+    await axios.delete(`${URI}${id}`);
+    setRecipients(recipients.filter((recipient) => recipient._id !== id));
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    deleteRequest().then((data) => {
+      console.log(data);
+      navigate("/recipients");
+    });
+  };
+
+  useEffect(() => {
+    deleteRequest().then((data) => setRecipient(data.recipient));
+  }, []);
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    axios
+      .get(`${URI}update/${id}`, recipient)
+
+      .then((data) => {
+        console.log(data);
+        if (data.status === 200) {
+          const recipient = recipients.find(
+            (recipient) => recipient._id === id
+          );
+          navigate(`/recipients/${recipient.id}`);
+        }
+      });
   };
 
   useEffect(() => {
@@ -86,9 +119,7 @@ export default function Recipients() {
               <td className="align-middle text-center">
                 <button
                   className="btn btn-info btn-md ms-auto"
-                  onClick={() => {
-                    handleDelete();
-                  }}
+                  onClick={handleEdit}
                 >
                   Edit
                 </button>
@@ -96,7 +127,14 @@ export default function Recipients() {
               <td className="align-middle text-center">
                 <button
                   className="btn btn-danger btn-md ms-auto"
-                  onClick={handleDelete}
+                  onClick={(id) => {
+                    if (
+                      window.confirm(
+                        "Are you sure you wish to delete this recipient?"
+                      )
+                    )
+                      handleDelete(id);
+                  }}
                 >
                   Delete
                 </button>

@@ -209,13 +209,17 @@ export default function CreateRecipient() {
                           name="sender"
                           required
                         >
-                          {Array.isArray(senders)
-                            ? senders.map((sender) => (
+                          {Array.isArray(senders) ? (
+                            senders.length > 0 ? (
+                              senders.map((sender) => (
                                 <option key={sender._id} value={sender._id}>
                                   {sender.firstName} {sender.lastName}
                                 </option>
                               ))
-                            : null}
+                            ) : (
+                              <option value="Select">Select</option>
+                            )
+                          ) : null}
                         </select>
                       </div>
                     </div>

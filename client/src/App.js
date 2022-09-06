@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import RecipientContainer from "./containers/RecipientContainer";
 import DashboardContainer from "./containers/DashboardContainer";
 import AuthContainer from "./containers/AuthContainer";
-
+import EditRecipient from "./components/recipients/EditRecipient";
 import { authActions } from "./store";
 import RecipientForm from "./components/recipients/RecipientForm";
 
@@ -28,6 +28,7 @@ function App() {
           <Route path="/" element={<DashboardContainer />} />
           <Route path="/dashboard" element={<DashboardContainer />} />
           <Route path="/recipient/add" element={<RecipientForm />} />
+          <Route path="/recipient/edit/:id" element={<EditRecipient />} />
         </Routes>
       </main>
     </React.Fragment>
