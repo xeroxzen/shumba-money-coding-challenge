@@ -17,9 +17,23 @@ app.use("/api/v1/customers", customerRouter);
 app.use("/api/v1/recipients", recipientRouter);
 app.use("/api/v1/transactions", transactionRouter);
 
+// Curb Cores Error by adding a header here
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
+
 const CONNECTION_URL = process.env.URI;
 const PORT = process.env.PORT || 5001;
-const DB = process.env.DB
+const DB = process.env.DB;
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
