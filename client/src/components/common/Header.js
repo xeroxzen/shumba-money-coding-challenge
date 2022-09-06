@@ -148,7 +148,7 @@ export default function Header() {
               <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
                 <button
                   onClick={() => dispatch(authActions.logout())}
-                  LinkComponent={Link}
+                  linkcomponent={Link}
                   to="/auth"
                   className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                 >
