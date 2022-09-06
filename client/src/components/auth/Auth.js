@@ -23,23 +23,8 @@ export default function Auth() {
         phoneNumber: inputs.phoneNumber,
         password: inputs.password,
       })
-      .then((res) => {
-        const { token } = res.data;
-        localStorage.setItem("userId", token);
-        localStorage.getItem("userId");
-        dispatch({
-          type: "LOGIN",
-          payload: res.data,
-        });
-        // success();
-      })
-
-      .catch((err) => {
-        if (err) {
-          console.log(err.response.data);
-          setResponse(err.response.data);
-        }
-      });
+      .catch((err) => console.log(err));
+    setResponse(res.data);
     const data = await res.data;
     console.log(data);
     return data;
