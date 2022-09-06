@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import "../../dist/output.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Auth() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const [response, setResponse] = useState();
   const [isRegister, setIsRegister] = useState(false);
   const [inputs, setInputs] = useState({});
 
@@ -23,7 +24,7 @@ export default function Auth() {
         password: inputs.password,
       })
       .catch((err) => console.log(err));
-
+    setResponse(res.data);
     const data = await res.data;
     console.log(data);
     return data;
@@ -45,17 +46,21 @@ export default function Auth() {
     console.log(inputs);
     if (isRegister) {
       sendRequest("register")
-        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
-
-        .then((data) => console.log(data));
+        .then(() => navigate("/"));
     } else {
       sendRequest()
-        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
-        .then((data) => console.log(data));
+        .then(() => navigate("/"));
     }
   };
+
+  // if status is 200 or 201 then navigate to dashboard
+  // useEffect(() => {
+  //   if (response && response.status === 200) {
+  //     navigate("dashboard");
+  //   }
+  // }, [response, navigate]);
 
   return (
     <>
@@ -71,10 +76,7 @@ export default function Auth() {
               {isRegister ? "Ready to send money?" : "Welcome Back"}
             </h2>
           </div>
-          <form
-            onSubmit={handleSubmit}
-            className="mt-8 space-y-6"
-          >
+          <form onSubmit={(e) => handleSubmit(e)} className="mt-8 space-y-6">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               {isRegister ? "Register" : "Login"}
@@ -206,8 +208,10 @@ export default function Auth() {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
+                  onChange={handleChange}
                   id="remember-me"
-                  name="remember-me"
+                  name="rememberMe"
+                  value={inputs.rememberMe}
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 />
