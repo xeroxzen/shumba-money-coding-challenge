@@ -3,31 +3,37 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateRecipient() {
-  const [recipient, setRecipient] = useState({});
   const navigate = useNavigate();
   const [senders, setSenders] = useState();
+  const [recipient, setRecipient] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    countryOfOrigin: "",
+    cityOrTown: "",
+  });
 
   const handleChange = (e) => {
     e.preventDefault();
-    setRecipient({
-      ...recipient,
+    setRecipient((prevState) => ({
+      ...prevState,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const sendRequest = async () => {
     const res = await axios
       .post("http://localhost:5001/api/v1/recipients/add", {
-        recipient: {
-          firstName: recipient.firstName,
-          lastName: recipient.lastName,
-          email: recipient.email,
-          phoneNumber: recipient.phoneNumber,
-          countryOfOrigin: recipient.countryOfOrigin,
-          cityOrTown: recipient.cityOrTown,
-          token: localStorage.getItem("userId"),
-          sender: recipient.sender,
-        },
+        firstName: recipient.firstName,
+        middleName: recipient.middleName,
+        lastName: recipient.lastName,
+        email: recipient.email,
+        phoneNumber: recipient.phoneNumber,
+        countryOfResidence: recipient.countryOfOrigin,
+        cityOrTown: recipient.cityOrTown,
+        sender: localStorage.getItem("userId"),
       })
       .catch((err) => console.log(err));
     const data = await res.data;
@@ -37,30 +43,12 @@ export default function CreateRecipient() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(inputs);
+    console.log(recipient);
     sendRequest()
       .then((data) => console.log(data))
       .then(() => console.log("Recipient created"))
-      .then(() => navigate("recipients"));
+      .then(() => navigate("/recipients"));
   };
-
-  useEffect(() => {
-    const setSender = async () => {
-      const res = await axios
-        .get("http://localhost:5001/api/v1/customers/", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userId")}`,
-          },
-          body: JSON.stringify(),
-        })
-        .catch((err) => console.log(err));
-      setSenders(res.data);
-      const data = await res.data;
-      console.log(data);
-      return data;
-    };
-    setSender();
-  }, []);
 
   return (
     <>
@@ -87,6 +75,7 @@ export default function CreateRecipient() {
                           type="text"
                           required
                           onChange={handleChange}
+                          value={recipient.firstName}
                           name="firstName"
                         />
                       </div>
@@ -103,6 +92,7 @@ export default function CreateRecipient() {
                           className="form-control"
                           type="text"
                           onChange={handleChange}
+                          value={recipient.middleName}
                           name="middleName"
                         />
                       </div>
@@ -120,6 +110,7 @@ export default function CreateRecipient() {
                           type="text"
                           required
                           onChange={handleChange}
+                          value={recipient.lastName}
                           name="lastName"
                         />
                       </div>
@@ -137,6 +128,7 @@ export default function CreateRecipient() {
                           type="phone"
                           required
                           onChange={handleChange}
+                          value={recipient.phoneNumber}
                           name="phoneNumber"
                         />
                       </div>
@@ -153,6 +145,7 @@ export default function CreateRecipient() {
                           className="form-control"
                           type="email"
                           onChange={handleChange}
+                          value={recipient.email}
                           name="email"
                         />
                       </div>
@@ -169,6 +162,7 @@ export default function CreateRecipient() {
                           onChange={(e) => handleChange(e)}
                           className="form-control"
                           name="countryOfOrigin"
+                          value={recipient.countryOfResidence}
                           required
                         >
                           <option value="Select">Select</option>
@@ -191,36 +185,9 @@ export default function CreateRecipient() {
                           className="form-control"
                           type="text"
                           onChange={handleChange}
+                          value={recipient.cityOrTown}
                           name="cityOrTown"
                         />
-                      </div>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-group">
-                        <label
-                          htmlFor="example-text-input"
-                          className="form-control-label"
-                        >
-                          Sender
-                        </label>
-                        <select
-                          onChange={(e) => handleChange(e)}
-                          className="form-control"
-                          name="sender"
-                          required
-                        >
-                          {Array.isArray(senders) ? (
-                            senders.length > 0 ? (
-                              senders.map((sender) => (
-                                <option key={sender._id} value={sender._id}>
-                                  {sender.firstName} {sender.lastName}
-                                </option>
-                              ))
-                            ) : (
-                              <option value="Select">Select</option>
-                            )
-                          ) : null}
-                        </select>
                       </div>
                     </div>
                   </div>

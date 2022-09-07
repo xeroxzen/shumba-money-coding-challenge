@@ -46,22 +46,24 @@ export default function Auth() {
     console.log(inputs);
     if (isRegister) {
       sendRequest("register")
+        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
         .then(() => navigate("/"));
     } else {
       sendRequest()
+        .then((data) => localStorage.setItem("userId", data.user._id))
         .then(() => dispatch(authActions.login()))
         .then(() => navigate("/"));
     }
   };
 
-  // Once logged in, generate a token valid across the app and store it in local storage and redux store for use in other components and pages of the app
-  useEffect(() => {
-    if (response && response.status === 200) {
-      localStorage.setItem("userId", response.data.token);
-      dispatch(authActions.login());
-    }
-  }, [response, dispatch]);
+  // // Once logged in, generate a token valid across the app and store it in local storage and redux store for use in other components and pages of the app
+  // useEffect(() => {
+  //   if (response && response.status === 200) {
+  //     localStorage.setItem("userId", response.data.token);
+  //     dispatch(authActions.login());
+  //   }
+  // }, [response, dispatch]);
 
   return (
     <>
