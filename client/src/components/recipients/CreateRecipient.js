@@ -4,14 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function CreateRecipient() {
   const navigate = useNavigate();
-  const [senders, setSenders] = useState();
   const [recipient, setRecipient] = useState({
     firstName: "",
     middleName: "",
     lastName: "",
     email: "",
     phoneNumber: "",
-    countryOfOrigin: "",
+    countryOfResidence: "",
     cityOrTown: "",
   });
 

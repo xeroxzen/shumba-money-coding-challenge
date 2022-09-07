@@ -46,7 +46,7 @@ export default function EditRecipient() {
   //           lastName: recipient.lastName,
   //           email: recipient.email,
   //           phoneNumber: recipient.phoneNumber,
-  //           countryOfOrigin: recipient.countryOfOrigin,
+  //           countryOfResidence: recipient.countryOfOrigin,
   //         },
   //       })
   //       .catch((err) => console.log(err));
@@ -184,8 +184,8 @@ export default function EditRecipient() {
                               <select
                                 onChange={(e) => handleChange(e)}
                                 className="form-control"
-                                name="countryOfOrigin"
-                                value={input.countryOfOrigin}
+                                name="countryOfResidence"
+                                value={input.countryOfResidence}
                                 required
                               >
                                 <option value="Select">Select</option>

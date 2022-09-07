@@ -20,7 +20,7 @@ export default function Recipients({ _id }) {
     return data;
   };
 
-  // REturn only recipients that belong to the currently logged in user
+  // REturn only recipients that belong to the currently
   const fetchRecipientsBySender = async () => {
     const res = await axios.get(`${URI}sender/${id}`).catch((err) => {
       console.log(err);
