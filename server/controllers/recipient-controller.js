@@ -126,15 +126,16 @@ export const getRecipientById = async (req, res, next) => {
   return res.status(200).json({ recipient });
 };
 
+// Get all recipients for a particular sender
 export const getBySenderId = async (req, res, next) => {
-  let sender;
+  let recipients;
   try {
-    sender = await Recipient.findById({ senderId: req.params.id });
+    recipients = await Recipient.find({ sender: req.params.id });
   } catch (err) {
     return console.error(err);
   }
-  if (!sender) {
-    return res.status(404).json({ message: "Sender not found" });
+  if (!recipients) {
+    return res.status(404).json({ message: "Recipients not found" });
   }
-  return res.status(200).json({ sender });
+  return res.status(200).json({ recipients });
 };
