@@ -58,7 +58,7 @@ export default function Recipients({ id }) {
     <>
       {Array.isArray(recipients)
         ? recipients.map((recipient, index) => (
-            <tr key={recipient._id} id={recipient.recipientId}>
+            <tr key={recipient._id} id={recipient._id}>
               <td>
                 <div className="d-flex px-2 py-1">
                   <div className="d-flex flex-column justify-content-center">

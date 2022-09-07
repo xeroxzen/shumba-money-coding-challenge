@@ -1,7 +1,5 @@
 import React from "react";
 import Recipients from "./Recipients";
-// import bootstrap
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function RecipientTable() {
   return (
@@ -11,8 +9,6 @@ export default function RecipientTable() {
           <div className="card mb-4">
             <div className="card-header pb-0 ">
               <div className="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                {/* make text color navy blue */}
-
                 <h3 className="text-2xl font-bold text-cyan-700 text-center text-uppercase">
                   Recipients
                 </h3>
