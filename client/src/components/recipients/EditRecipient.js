@@ -3,11 +3,12 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditRecipient(recipientId) {
-  const [recipient, setRecipient] = useState({});
+  const [recipient, setRecipient] = useState();
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
   const URI = "http://localhost:5001/api/v1/recipients/";
   const id = useParams().id;
+  console.log(id);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ export default function EditRecipient(recipientId) {
 
   // Update recipient details
   const fetchRecipient = async () => {
-    const res = await axios.get(`${URI}update/${recipientId}}`).catch((err) => {
+    const res = await axios.get(`${URI}update/${id}`).catch((err) => {
       console.log(err);
     });
     const data = await res.data;
@@ -29,46 +30,33 @@ export default function EditRecipient(recipientId) {
 
   useEffect(() => {
     fetchRecipient().then((data) => {
-      setRecipient(data.recipient);
-      console.log(data.recipient);
-      setInputs({
-        ...data,
-      });
+      setRecipient(data);
+      console.log(data);
     });
   }, [id]);
 
-  //   const sendUpdateRequest = async () => {
-  //     const res = await axios
-  //       .put(`${URI}update/${id}`, {
-  //         recipient: {
-  //           firstName: recipient.firstName,
-  //           middleName: recipient.middleName,
-  //           lastName: recipient.lastName,
-  //           email: recipient.email,
-  //           phoneNumber: recipient.phoneNumber,
-  //           countryOfResidence: recipient.countryOfOrigin,
-  //         },
-  //       })
-  //       .catch((err) => console.log(err));
-  //     const data = await res.data;
-  //     console.log(data);
-  //     return data;
-  //   };
+  const sendUpdateRequest = async () => {
+    const res = await axios
+      .put(`${URI}update/${id}`, {
+        firstName: recipient.firstName,
+        middleName: recipient.middleName,
+        lastName: recipient.lastName,
+        email: recipient.email,
+        phoneNumber: recipient.phoneNumber,
+        countryOfResidence: recipient.countryOfResidence,
+      })
+      .catch((err) => console.log(err));
+    const data = await res.data;
+    console.log(data);
+    return data;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = axios.put(`${URI}update/${id}`, {
-        recipient: {
-          ...recipient,
-        },
-      });
-      const data = res.data;
+    console.log(recipient);
+    sendUpdateRequest().then((data) => {
       console.log(data);
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
 
   return (

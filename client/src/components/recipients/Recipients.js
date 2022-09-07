@@ -10,7 +10,7 @@ export default function Recipients({ recipientId }) {
   const URI = "http://localhost:5001/api/v1/recipients/";
   const navigate = useNavigate();
 
-  // Return all recipients available in the database
+  // Return all recipients available in the database, not using this here though
   const fetchRecipients = async () => {
     const res = await axios.get(`${URI}`).catch((err) => {
       console.log(err);
@@ -30,22 +30,20 @@ export default function Recipients({ recipientId }) {
     return data;
   };
 
-  const deleteRequest = async (id) => {
-    await axios.delete(`${URI}${id}`);
-    setRecipients(recipients.filter((recipient) => recipient._id !== id));
+  const deleteRequest = async () => {
+    const res = await axios.delete(`${URI}${recipientId}`).catch((err) => {
+      console.log(err);
+    });
+    const data = await res.data;
+    console.log(data);
+    return data;
   };
 
   const handleDelete = (e) => {
-    e.preventDefault();
     deleteRequest().then((data) => {
       console.log(data);
-      navigate("/recipients");
     });
   };
-
-  useEffect(() => {
-    deleteRequest().then((data) => setRecipient(data.recipient));
-  }, []);
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -61,7 +59,7 @@ export default function Recipients({ recipientId }) {
     <>
       {Array.isArray(recipients)
         ? recipients.map((recipient, index) => (
-            <tr key={recipient._id}>
+            <tr key={recipient._id} id={recipient.recipientId}>
               <td>
                 <div className="d-flex px-2 py-1">
                   <div className="d-flex flex-column justify-content-center">
