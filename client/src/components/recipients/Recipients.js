@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function Recipients({ _id }) {
+export default function Recipients({ recipientId }) {
   const [recipients, setRecipients] = useState({});
   const [recipient, setRecipient] = useState({});
   const id = localStorage.getItem("userId");
@@ -49,18 +49,8 @@ export default function Recipients({ _id }) {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    axios
-      .get(`${URI}update/${id}`, recipient)
 
-      .then((data) => {
-        console.log(data);
-        if (data.status === 200) {
-          const recipient = recipients.find(
-            (recipient) => recipient._id === id
-          );
-          navigate(`/recipients/${recipient.id}`);
-        }
-      });
+    navigate(`/recipient/edit/${recipientId}`);
   };
 
   useEffect(() => {
@@ -117,6 +107,7 @@ export default function Recipients({ _id }) {
                 <button
                   className="btn btn-info btn-md ms-auto"
                   onClick={handleEdit}
+                  id={recipient._id}
                 >
                   Edit
                 </button>

@@ -158,7 +158,7 @@ export default function CreateRecipient() {
                           Country
                         </label>
                         <select
-                          onChange={(e) => handleChange(e)}
+                          onChange={ handleChange}
                           className="form-control"
                           name="countryOfOrigin"
                           value={recipient.countryOfResidence}

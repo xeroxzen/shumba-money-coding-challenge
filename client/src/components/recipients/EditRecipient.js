@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function EditRecipient() {
+export default function EditRecipient(recipientId) {
   const [recipient, setRecipient] = useState({});
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
@@ -19,7 +19,7 @@ export default function EditRecipient() {
 
   // Update recipient details
   const fetchRecipient = async () => {
-    const res = await axios.get(`${URI}update/${id}`).catch((err) => {
+    const res = await axios.get(`${URI}update/${recipientId}}`).catch((err) => {
       console.log(err);
     });
     const data = await res.data;
