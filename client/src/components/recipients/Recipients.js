@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Recipients({ recipientId }) {
+export default function Recipients({ id }) {
   const [recipients, setRecipients] = useState({});
-  const [recipient, setRecipient] = useState({});
-  const id = localStorage.getItem("userId");
-  const [user, setUser] = useState();
+  const userId = localStorage.getItem("userId");
   const URI = "http://localhost:5001/api/v1/recipients/";
   const navigate = useNavigate();
+  const recipientId = id;
 
   // Return all recipients available in the database, not using this here though
   const fetchRecipients = async () => {
@@ -22,7 +21,7 @@ export default function Recipients({ recipientId }) {
 
   // REturn only recipients that belong to the currently
   const fetchRecipientsBySender = async () => {
-    const res = await axios.get(`${URI}sender/${id}`).catch((err) => {
+    const res = await axios.get(`${URI}sender/${userId}`).catch((err) => {
       console.log(err);
     });
     const data = await res.data;
@@ -31,7 +30,7 @@ export default function Recipients({ recipientId }) {
   };
 
   const deleteRequest = async () => {
-    const res = await axios.delete(`${URI}${recipientId}`).catch((err) => {
+    const res = await axios.delete(`${URI}${id}`).catch((err) => {
       console.log(err);
     });
     const data = await res.data;
